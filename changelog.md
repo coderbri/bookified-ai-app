@@ -1,5 +1,28 @@
 # Bookified: AI Learning Assistant | Changelog
 
+## [ v0.4.0 ] – Homepage UI and Book Grid Implementation
+**Release Date:** April 10, 2026
+
+- **Implemented homepage layout**
+  - Structured `app/page.tsx` with a hero section and dynamic book grid.
+- **Built Hero section component**
+  - Generated `Hero.tsx` using LLM-assisted UI scaffolding based on detailed prompt and design mockup.
+- **Initialized book grid system**
+  - Created a responsive grid layout to display library books on the homepage.
+- **Added mock data and constants management**
+  - Introduced `lib/constants.ts` to store reusable data, including sample book data for development.
+- **Developed reusable BookCard component**
+  - Built `BookCard.tsx` to display book cover, title, and author with dynamic routing.
+  - Utilized typed props via `types.d.ts` for type safety and component consistency.
+- **Enabled dynamic routing for books**
+  - Linked each book card to a unique route using its slug.
+- **Configured external image handling**
+  - Updated `next.config.ts` to allow remote image sources for book covers.
+- **Extended Next.js configuration**
+  - Adjusted server action limits and TypeScript settings to support development workflow.
+
+---
+
 ## [ v0.3.0 ] – Authentication Integration with Clerk
 **Release Date:** April 10, 2026
 

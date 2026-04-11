@@ -1,5 +1,24 @@
 # Bookified: AI Learning Assistant | Changelog
 
+## [ v0.5.0 ] – Create Book Page and Upload Form
+**Release Date:** April 11, 2026
+
+- **Restructured routing with root layout**
+  - Created `(root)` directory and moved existing `page.tsx` into it.
+- **Initialized book creation route**
+  - Added `books/new/` directory within `(root)/` with its own `page.tsx`.
+- **Built Create Book page structure**
+  - Implemented header content and integrated form layout for book uploads.
+- **Developed UploadForm component**
+  - Created `UploadForm.tsx` as a `'use client'` component for interactive form handling.
+  - Leveraged shadcn/ui components with React Hook Form for flexible and scalable form management.
+- **Applied LLM-assisted UI scaffolding**
+  - Used the same structured prompting approach as the homepage to generate and refine form UI components.
+- **Prepared form system for future functionality**
+  - Set up foundational structure for handling user input, validation, and submission logic.
+
+---
+
 ## [ v0.4.0 ] – Homepage UI and Book Grid Implementation
 **Release Date:** April 10, 2026
 

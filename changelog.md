@@ -1,5 +1,39 @@
 # Bookified: AI Learning Assistant | Changelog
 
+## [ v0.6.0 ] – Database Integration and Schema Design
+**Release Date:** April 16, 2026
+
+- **Set up MongoDB Atlas database**
+  - Created cloud cluster using free tier with AWS provider and automatic security configuration.
+  - Selected region based on proximity for lower latency.
+- **Established database connection layer**
+  - Installed `mongodb` and `mongoose` dependencies.
+  - Stored connection string securely in environment variables.
+  - Implemented `database/mongoose.ts` to manage database connections.
+    - Used a global cache to persist connections across hot reloads in development.
+    - Prevented multiple connections by reusing an existing promise/connection.
+    - Added error handling and logging for connection reliability.
+- **Implemented Book schema and model**
+  - Created `book.model.ts` using Mongoose schema aligned with `IBook` TypeScript interface.
+  - Defined required fields (title, author, file metadata) and optional fields (persona, cover).
+  - Enforced uniqueness and formatting on `slug` for clean routing.
+  - Enabled timestamps for automatic tracking of creation and updates.
+- Designed BookSegment schema for content processing
+  - Created `book-segment.model.ts` to store segmented book content.
+  - Linked segments to parent book using ObjectId references.
+  - Added indexing for efficient querying by book, segment order, and page number.
+  - Implemented compound unique index (`bookId + segmentIndex`) to prevent duplicate segments.
+  - Enabled full-text search indexing on content for future AI/query features.
+- **Built VoiceSession schema for usage tracking**
+  - Created `voice-session.model.ts` to track user voice interactions.
+  - Stored session duration, timestamps, and billing period data.
+  - Indexed fields for efficient queries on user activity and billing cycles.
+- **Standardized model structure**
+  - Used `models || model` pattern to prevent model recompilation issues in Next.js.
+  - Maintained type safety by aligning all schemas with shared TypeScript interfaces.
+
+---
+
 ## [ v0.5.0 ] – Create Book Page and Upload Form
 **Release Date:** April 11, 2026
 

@@ -1,5 +1,42 @@
 # Bookified: AI Learning Assistant | Changelog
 
+## [ v0.7.0 ] – Create Book Flow and File Processing Pipeline (Part 1)
+**Release Date:** April 17, 2026
+
+- **Implemented server actions for book creation**
+  - Created `lib/actions/book.actions.ts` to handle database operations using server actions.
+  - Added `checkBookExists` to prevent duplicate books by generating a slug and querying the database.
+  - Built `createBook` to insert a new book document or return an existing one if already present.
+  - Implemented `saveBookSegments` to batch insert parsed text segments and update total segment count.
+  - Centralized error handling and response structure for consistent API behavior.
+- **Enhanced utility layer for data processing**
+  - Added `generateSlug` to normalize titles into URL-friendly identifiers.
+  - Introduced `serializeData` to convert Mongoose documents into plain JSON objects.
+  - Built `splitIntoSegments` to chunk large text into overlapping segments for search and AI processing.
+  - Implemented `parsePDFFile` to:
+    - Extract full text content from uploaded PDFs.
+    - Generate a cover image from the first page using canvas.
+    - Convert text into structured segments for database storage.
+- **Integrated file upload and storage workflow**
+  - Used Vercel Blob API to upload PDF files and cover images.
+  - Supported both user-uploaded covers and auto-generated covers from parsed PDFs.
+- **Added form validation with Zod**
+  - Created `UploadSchema` to validate inputs (title, author, PDF, optional image).
+  - Enforced file size/type constraints for reliability and security.
+- **Implemented UploadForm submission flow**
+  - Validates authentication before allowing uploads.
+  - Checks for existing books and redirects if a duplicate is found.
+  - Parses uploaded PDF to extract text and generate cover.
+  - Uploads PDF and cover image to cloud storage.
+  - Creates book record in database with metadata and file references.
+  - Saves parsed text segments for search and AI processing.
+  - Handles success/error states with toast notifications and redirects.
+- **Improved user feedback and UX**
+  - Integrated `sonner` toaster for real-time success/error messages.
+  - Added loading overlay during async operations to prevent duplicate submissions.
+
+---
+
 ## [ v0.6.0 ] – Database Integration and Schema Design
 **Release Date:** April 16, 2026
 

@@ -95,17 +95,20 @@ export async function parsePDFFile(file: File) {
     const pdfjsLib = await import('pdfjs-dist');
 
     if (typeof window !== 'undefined') {
-      pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-          'pdfjs-dist/build/pdf.worker.min.mjs',
-          import.meta.url,
-      ).toString();
+      // Use a consistent CDN URL and ensure it's absolute
+      // Also fallback to unpkg if cdnjs fails, but start with cdnjs
+      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
     }
 
     // Read file as array buffer
     const arrayBuffer = await file.arrayBuffer();
 
     // Load PDF document
-    const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+    const loadingTask = pdfjsLib.getDocument({
+      data: arrayBuffer,
+      useWorkerFetch: true,
+      isEvalSupported: false,
+    });
     const pdfDocument = await loadingTask.promise;
 
     // Render first page as cover image

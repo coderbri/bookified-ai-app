@@ -24,7 +24,7 @@ const UploadForm = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
     const { userId } = useAuth();
-    const router = useRouter();
+    const router = useRouter()
 
     useEffect(() => {
         setIsMounted(true);
@@ -42,20 +42,21 @@ const UploadForm = () => {
     });
 
     const onSubmit = async (data: BookUploadFormValues) => {
-        if (!userId) {
+        if(!userId) {
             return toast.error("Please login to upload books");
         }
 
         setIsSubmitting(true);
 
-        // PostHog -> Track Book Uploads
+        // PostHog -> Track Book Uploads...
+
         try {
             const existsCheck = await checkBookExists(data.title);
 
-            if (existsCheck.exists && existsCheck.book) {
+            if(existsCheck.exists && existsCheck.book) {
                 toast.info("Book with same title already exists.");
-                form.reset();
-                router.push(`/books/${existsCheck.book.slug}`);
+                form.reset()
+                router.push(`/books/${existsCheck.book.slug}`)
                 return;
             }
 
@@ -64,7 +65,7 @@ const UploadForm = () => {
 
             const parsedPDF = await parsePDFFile(pdfFile);
 
-            if (parsedPDF.content.length === 0) {
+            if(parsedPDF.content.length === 0) {
                 toast.error("Failed to parse PDF. Please try again with a different file.");
                 return;
             }
@@ -108,8 +109,7 @@ const UploadForm = () => {
                 fileSize: pdfFile.size,
             });
 
-            if (!book.success) throw new Error("Failed to create book");
-
+            if(!book.success) toast.error(book.error as string || "Failed to create book");
 
             if(book.alreadyExists) {
                 toast.info("Book with same title already exists.");

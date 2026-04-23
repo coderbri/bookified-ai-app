@@ -1,5 +1,39 @@
 # Bookified: AI Learning Assistant | Changelog
 
+## [ v0.7.1 ] – Create Book Flow and File Processing Pipeline (Part 2)
+**Release Date:** April 23, 2026
+
+- **Diagnosed upload failures in local development**
+  - Identified environment variable issues preventing successful Blob storage uploads.
+  - Verified UI feedback flow (loading state and toast error handling).
+- **Deployed application to Vercel**
+  - Deployed project to enable full environment configuration and access to Vercel storage features.
+  - Retrieved required Blob storage environment variables from Vercel dashboard.
+- **Configured Vercel Blob storage**
+  - Created Blob store (Fast Object Storage) with public access.
+  - Selected region based on proximity for performance optimization.
+  - Added generated storage credentials to environment variables.
+- **Implemented server-side upload route**
+  - Created `app/api/upload/route.ts` to securely handle file uploads.
+  - Integrated `handleUpload` from `@vercel/blob/client` for direct client-to-storage uploads.
+- **Secured upload pipeline with authentication**
+  - Used Clerk’s `auth()` to validate user identity before അനുവദing uploads.
+  - Rejected unauthorized requests with appropriate error handling.
+- **Enforced upload constraints and validation**
+  - Restricted allowed file types (PDF and image formats).
+  - Applied maximum file size limits using shared constants.
+  - Enabled random suffix generation to prevent filename collisions.
+- **Added upload lifecycle handling**
+  - Implemented `onBeforeGenerateToken` to validate user and define upload rules.
+  - Implemented `onUploadCompleted` to log uploaded file metadata and prepare for future analytics integration.
+- **Standardized API error handling**
+  - Returned structured JSON responses with appropriate HTTP status codes.
+  - Differentiated between authentication and general upload failures.
+- **Completed end-to-end upload functionality**
+  - Established secure, scalable pipeline from client upload → server validation → Blob storage.
+
+---
+
 ## [ v0.7.0 ] – Create Book Flow and File Processing Pipeline (Part 1)
 **Release Date:** April 17, 2026
 

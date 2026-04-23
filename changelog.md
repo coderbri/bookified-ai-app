@@ -1,5 +1,30 @@
 # Bookified: AI Learning Assistant | Changelog
 
+## [ v0.8.0 ] – Fetch Books from Database
+**Release Date:** April 23, 2026
+
+- **Implemented book retrieval query**
+  - Added `getAllBooks` server action to fetch books from MongoDB.
+  - Supported optional search functionality using case-insensitive regex on title and author.
+  - Escaped user input with `escapeRegex` to prevent malformed queries or security issues.
+  - Sorted results by `createdAt` (newest first) for better UX.
+  - Serialized Mongoose documents for safe client consumption.
+- **Integrated database data into homepage**
+  - Replaced mock data with live database queries in `app/(root)/page.tsx`.
+  - Converted page component to async server component for direct data fetching.
+  - Mapped over fetched books to render `BookCard` components dynamically.
+- **Added defensive data handling**
+  - Ensured fallback to an empty array when query fails or returns undefined.
+  - Prevented runtime errors during rendering.
+- **Updated image configuration for external sources**
+  - Configured `next.config.ts` to allow remote images from Vercel Blob storage.
+  - Resolved image loading errors caused by newly integrated database content.
+- **Completed transition from static to dynamic data**
+  - Fully replaced mock dataset with persistent database-backed content.
+
+
+---
+
 ## [ v0.7.1 ] – Create Book Flow and File Processing Pipeline (Part 2)
 **Release Date:** April 23, 2026
 

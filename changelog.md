@@ -1,5 +1,40 @@
 # Bookified: AI Learning Assistant | Changelog
 
+## [ v0.9.0 ] – Vapi Integration and Voice AI Setup
+**Release Date**: April 23, 2026
+
+- **Implemented “Talk to Your Book” page**
+  - Created dynamic route `app/[slug]/page.tsx` to load individual book sessions.
+  - Enforced authentication using Clerk and redirected unauthenticated users.
+  - Fetched book data via `getBookBySlug` and handled invalid routes with redirects.
+  - Integrated `VapiControls` component as the entry point for voice interaction UI.
+- **Integrated Vapi voice AI platform**
+  - Configured external voice AI agent to enable real-time conversational interaction with books.
+  - Connected LLM and voice provider (ElevenLabs) for speech synthesis and response generation.
+- **Designed assistant behavior via system prompt**
+  - Defined strict identity grounding using book content retrieved via `searchBook`.
+  - Enforced concise conversational responses (2–3 sentences, always ending with a question).
+  - Implemented adaptive conversation flow:
+    - Reading status → user intent → tailored interaction (academic vs personal).
+  - Added constraints for natural voice UX (no formatting, short responses, dynamic questioning).
+  - Included safeguards for hallucination prevention and content verification.
+- **Configured Vapi assistant and tools**
+  - Created assistant in Vapi dashboard with custom system prompt and no fixed first message.
+  - Added `searchBooks` tool with `query` and `bookId` parameters.
+  - Connected tool to backend endpoint (`/api/vapi/search-book`) for real-time content retrieval.
+  - Set request timeout and enabled server communication with deployed app.
+- **Set up voice configuration**
+  - Integrated ElevenLabs voices with predefined options and categories.
+  - Tuned voice settings (stability, clarity, latency) for conversational AI experience.
+  - Defined default voice and mapped persona selection to voice IDs.
+- **Added environment configuration**
+  - Stored Vapi assistant ID and public API key in environment variables.
+  - Connected constants layer (`lib/constants.ts`) to runtime configuration.
+- **Established foundation for voice-driven UX**
+  - Enabled end-to-end pipeline: user → voice input → Vapi agent → book content retrieval → spoken response.
+
+---
+
 ## [ v0.8.0 ] – Fetch Books from Database
 **Release Date:** April 23, 2026
 
@@ -21,7 +56,6 @@
   - Resolved image loading errors caused by newly integrated database content.
 - **Completed transition from static to dynamic data**
   - Fully replaced mock dataset with persistent database-backed content.
-
 
 ---
 

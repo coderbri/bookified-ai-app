@@ -1,5 +1,46 @@
 # Bookified: AI Learning Assistant | Changelog
 
+## [ v0.9.1 ] – Voice Hook and Conversation UI
+**Release Date**: April 23, 2026
+
+- **Implemented core voice interaction hook**
+  - Created `hooks/useVapi.ts` to manage the full voice session lifecycle.
+  - Initialized Vapi SDK and handled states: idle → connecting → listening → thinking → speaking.
+  - Tracked conversation data via `messages`, `currentMessage`, and `currentUserMessage` for real-time streaming UI.
+  - Implemented duration timer with enforced session limits based on user subscription.
+  - Integrated server actions to start and end voice sessions with persistence in the database.
+  - Added robust event handling for call lifecycle, transcripts, and error states.
+- **Built VapiControls component for interaction UI**
+  - Connected `useVapi` hook to UI controls (start/stop microphone).
+  - Displayed real-time session state (connecting, listening, speaking, etc.).
+  - Rendered session metadata (duration, selected voice, status indicators).
+  - Handled error states with toast notifications and conditional redirects (e.g., billing limits).
+  - Provided visual feedback for active voice states (animations, mic toggle).
+- **Developed transcript-based conversation interface**
+  - Created `Transcript.tsx` to render chat-style conversation between user and AI.
+  - Displayed finalized messages along with real-time streaming transcripts.
+  - Implemented auto-scroll behavior for continuous conversation flow.
+  - Added empty state UI prompting users to begin interaction.
+- **Implemented voice session tracking**
+  - Added `startVoiceSession` to:
+    - Validate user subscription limits (monthly sessions, duration caps).
+    - Create a new session record in the database.
+  - Added `endVoiceSession` to:
+    - Persist session duration and end timestamp.
+  - Ensured session cleanup on call end, errors, and component unmount.
+- **Introduced subscription and usage limits system**
+  - Created `subscription-constants.ts` to define plan tiers (Free, Standard, Pro).
+  - Configured limits for:
+    - Number of books
+    - Monthly voice sessions
+    - Maximum session duration
+  - Implemented billing period tracking for monthly usage enforcement.
+- **Established real-time voice conversation pipeline**
+  - Connected UI → Vapi SDK → server actions → database tracking.
+  - Enabled live, streaming, voice-driven conversations with persistent session data.
+
+---
+
 ## [ v0.9.0 ] – Vapi Integration and Voice AI Setup
 **Release Date**: April 23, 2026
 

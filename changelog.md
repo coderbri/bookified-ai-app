@@ -1,5 +1,34 @@
 # Bookified: AI Learning Assistant | Changelog
 
+## [ v0.10.0 ] – Search Tool Integration
+**Release Date**: April 24, 2026
+
+- **Implemented Vapi search tool API route**
+  - Created `app/api/vapi/search-book/route.ts` to handle tool calls from Vapi.
+  - Enabled backend endpoint for querying book content during voice conversations.
+- **Built book content search handler**
+  - Implemented `processBookSearch` to:
+    - Validate and sanitize incoming `bookId` and `query` parameters.
+    - Call `searchBookSegments` to retrieve the top 3 most relevant text segments.
+    - Combine matching segments into a single response string.
+    - Return a fallback message when no relevant content is found.
+- **Supported multiple Vapi request formats**
+  - Handled both `functionCall` (single call) and `toolCallList` (batch calls).
+  - Normalized incoming arguments using a `parseArgs` helper to support JSON string or object formats.
+  - Returned structured responses mapped to each tool call ID for compatibility with Vapi.
+- **Added robust validation and error handling**
+  - Prevented invalid inputs (null, undefined, empty strings) before processing queries.
+  - Returned safe fallback responses for unknown functions or missing tool calls.
+  - Logged incoming requests and errors for debugging and observability.
+- **Enabled real-time content retrieval for voice agent**
+  - Connected Vapi assistant → API route → database search → response pipeline.
+  - Allowed AI agent to dynamically fetch relevant book content during conversations.
+- **Completed deployment-ready integration**
+  - Finalized backend endpoint required for Vapi tool configuration.
+  - Ensured compatibility with deployed Vercel environment.
+
+---
+
 ## [ v0.9.1 ] – Voice Hook and Conversation UI
 **Release Date**: April 23, 2026
 

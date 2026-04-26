@@ -1,6 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, MicOff, Mic } from "lucide-react";
 

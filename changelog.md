@@ -1,5 +1,45 @@
 # Bookified: AI Learning Assistant | Changelog
 
+## [ v0.10.1 ] – Search Tool Integration – Bug Fixes & UX Improvements  
+**Release Date:** May 5, 2026
+
+- **Resolved image loading issues**
+  - Updated Vercel Blob hostname in `next.config.ts` to match current storage URL.
+  - Ensured proper rendering of uploaded book covers.
+- **Added dedicated book upload page**
+  - Created `/books/new` route with structured upload UI.
+  - Integrated `UploadForm` component for streamlined book creation.
+- **Implemented search functionality**
+  - Built `Search` component with debounced query handling.
+  - Integrated query params into homepage data fetching.
+  - Enabled filtering by title and author via `getAllBooks(query)`.
+- **Improved homepage layout**
+  - Added search bar alongside “Recent Books” section.
+  - Ensured dynamic rendering of filtered book results.
+- **Introduced subscriptions/pricing page**
+  - Created `/subscriptions` route using Clerk `PricingTable`.
+  - Provided upgrade path for plan-based feature limits.
+- **Enhanced navigation system**
+  - Added “Pricing” link to navbar.
+  - Improved active route detection logic.
+  - Displayed signed-in user with quick access to subscriptions.
+- **Enhanced upload user experience**
+  - Added `LoadingOverlay` during PDF processing.
+  - Improved feedback for long-running synthesis operations.
+- **Strengthened upload pipeline**
+  - Validated duplicate books before creation.
+  - Added fallback cover generation from parsed PDF.
+  - Ensured reliable uploads for PDF and cover images via Vercel Blob.
+- **Improved error handling and plan enforcement**
+  - Added user feedback for PDF parsing failures.
+  - Handled upload errors more gracefully.
+  - Enforced plan-based limits on book creation.
+  - Redirected users to pricing page on billing-related restrictions.
+- **Completed end-to-end book creation flow**
+  - Implemented full pipeline: parse PDF → upload files → create book → segment content → persist to database.
+
+---
+
 ## [ v0.10.0 ] – Search Tool Integration
 **Release Date**: April 24, 2026
 

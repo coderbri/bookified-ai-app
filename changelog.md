@@ -1,5 +1,41 @@
 # Bookified: AI Learning Assistant | Changelog
 
+## [ v0.11.1 ] – Subscription Duration Fixes & Voice Session Stability
+**Release Date:** May 8, 2026
+
+- **Fixed subscription-based session duration handling**
+  - Corrected voice session duration calculations across Free, Standard, and Pro plans.
+  - Ensured active session limits dynamically reflect the user’s current subscription tier.
+  - Prevented outdated limit values from being used during active Vapi sessions.
+
+- **Improved `useVapi` timer synchronization**
+  - Added `limitsRef` to keep subscription limits synchronized inside interval callbacks.
+  - Implemented automatic session termination when plan duration limits are reached.
+  - Improved timer consistency during long-running voice conversations.
+
+- **Restored real-time session countdown support**
+  - Re-enabled:
+    - `maxDurationSeconds`
+    - `remainingSeconds`
+    - `showTimeWarning`
+  - Improved session countdown accuracy and low-time warning behavior.
+
+- **Enhanced voice session UX**
+  - Fixed incorrect duration displays shown in `VapiControls`.
+  - Improved real-time feedback for remaining session time.
+  - Added support for plan-aware warning states as sessions approach expiration.
+
+- **Improved duration formatting reliability**
+  - Updated `formatDuration()` in `lib/utils.ts`.
+  - Added validation for invalid or `NaN` duration values.
+  - Ensured fallback formatting safely returns `"0:00"` when needed.
+
+- **Stabilized subscription-aware voice sessions**
+  - Improved synchronization between session timers and billing restrictions.
+  - Refined session lifecycle handling for more reliable enforcement of plan limits.
+
+---
+
 ## [ v0.11.0 ] – Add Subscription Plans and Enforce Limits
 **Release Date:** May 8, 2026
 

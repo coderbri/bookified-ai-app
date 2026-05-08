@@ -1,5 +1,66 @@
 # Bookified: AI Learning Assistant | Changelog
 
+## [ v0.11.0 ] – Add Subscription Plans and Enforce Limits
+**Release Date:** May 8, 2026
+
+- **Integrated Clerk Billing for SaaS monetization**
+  - Enabled Clerk Billing from the Clerk dashboard configuration.
+  - Transitioned Bookified into a subscription-based SaaS platform.
+  - Prepared application features for monetization through usage limits and plan enforcement.
+
+- **Created subscription plans and feature tiers**
+  - Configured Free, Standard, and Pro plans in Clerk.
+  - Added plan-specific features:
+    - Standard:
+      - Up to 10 books
+      - 100 voice sessions per month
+      - 15-minute sessions
+    - Pro:
+      - Up to 100 books
+      - Unlimited voice sessions
+      - 60-minute sessions
+  - Configured monthly and annual pricing support.
+
+- **Configured Clerk MCP server integration**
+  - Added Clerk MCP server configuration for AI-assisted workflows.
+  - Enabled MCP support through IDE settings using Clerk’s hosted MCP endpoint.
+
+- **Added subscription and billing types**
+  - Extended `types.d.ts` with:
+    - `SessionCheckResult`
+    - `StartSessionResult`
+    - `EndSessionResult`
+  - Added billing-related response handling and plan metadata typing.
+
+- **Implemented server-side subscription utilities**
+  - Created `lib/subscription.server.ts`.
+  - Added `getUserPlan()` to resolve active Clerk subscription plans.
+  - Added `getPlanLimits()` helper to retrieve plan restrictions dynamically.
+
+- **Implemented plan-based book upload limits**
+  - Added subscription validation inside `createBook`.
+  - Restricted uploads based on the current plan’s `maxBooks` limit.
+  - Prevented unauthorized uploads by validating Clerk user identity.
+  - Redirected users toward upgrading when limits are exceeded.
+
+- **Implemented voice session plan enforcement**
+  - Added subscription-aware session validation in `startVoiceSession`.
+  - Restricted monthly voice sessions based on plan allowances.
+  - Added dynamic session duration limits per subscription tier.
+  - Stored billing-period usage tracking in MongoDB.
+
+- **Improved billing-related error handling**
+  - Returned structured billing errors using `isBillingError`.
+  - Added upgrade prompts when users exceed subscription limits.
+  - Triggered route revalidation after billing-related state changes.
+
+- **Tested subscription enforcement workflows**
+  - Verified upload restrictions for users exceeding allowed book limits.
+  - Confirmed session limits correctly block additional voice conversations.
+  - Validated Clerk dashboard revenue tracking integration.
+
+---
+
 ## [ v0.10.1 ] – Search Tool Integration – Bug Fixes & UX Improvements  
 **Release Date:** May 5, 2026
 
